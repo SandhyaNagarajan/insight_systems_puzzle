@@ -1,0 +1,49 @@
+version: '3'
+services:
+  db:
+# Author:Sandhya Nagarajan
+# Date : 06/01/2018
+#notes:the mentioned version of postgres(9.6.5) is not supported anymore, so added the
+#latest supported version on the same branch
+    image: "postgres:9.6.9"
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+    env_file:
+      - env_file
+    networks:
+      - db_network
+  flaskapp:
+    build: .
+    env_file:
+      - env_file
+    volumes:
+      - .:/opt/services/flaskapp/src
+    networks:
+      - db_network
+      - web_network
+    depends_on:
+      - db
+  nginx:
+# Author:Sandhya Nagarajan
+# Date : 06/01/2018
+#notes:the mentioned version of nginx(1.13.5) is not supported anymore, so added the
+#latest supported version on the same branch
+    image: "nginx:1.13.12"
+    ports:
+# Author:Sandhya Nagarajan
+# Date : 06/01/2018
+# Notes: The right format for configuring port is 8080:80
+      - "8080:80"
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+    networks:
+      - web_network
+    depends_on:
+      - flaskapp
+networks:
+  db_network:
+    driver: bridge
+  web_network:
+    driver: bridge
+volumes:
+  dbdata:
