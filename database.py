@@ -8,11 +8,16 @@ pwd = os.environ['POSTGRES_PASSWORD']
 db = os.environ['POSTGRES_DB']
 host = 'db'
 port = '5432'
-engine = create_engine('postgres://%s:%s@%s:%s/%s' % (user, pwd, host, port, db))
+# Author:Sandhya Nagarajan
+# Date : 06/09/2018
+# Notes: <Debugging>
+# added echo = True to get the log from the DB on the console
+engine = create_engine('postgres://%s:%s@%s:%s/%s' % (user, pwd, host, port, db),echo=True)
 
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
-                                         bind=engine))
+                                         bind=engine,
+                                         expire_on_commit=True))
 Base = declarative_base()
 Base.query = db_session.query_property()
 

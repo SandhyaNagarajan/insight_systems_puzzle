@@ -68,18 +68,47 @@ While technologies like Kubernetes are quite powerful, they're likely overkill f
 
 # Sandhya solution
 
-##docker-compose.yml
-### <bugfix> nginx port configuration was wrong:
-The right format for configuring port is 8080:80
-### <improvement> postgres version is not supported
-The mentioned version of postgres(9.6.5) is not supported anymore, so added the
-latest supported version on the same branch
-### <improvement> nginx version is not supported
-the mentioned version of postgres(9.6.5) is not supported anymore, so added the
-latest supported version on the same branch
+## How to debug the container
+### In app.py:
+ 'app.config['DEBUG'] = True' to display each internal step and to auto detect
+ change in the file and autoreload the app
+### In database.py :
+ add echo = True to get the log from the DB on the console
+### while running docker-compose up:
+ DO NOT use '-d'(demon mode) to see the log in the console
 
-##app.py
-### <bugfix> added port 5001 in the run
+## How to clear all the containers and imagines to restart the whole application
+run ./clearall.sh in the project root. clearall.sh is available in this github root.
+clearall.sh:
+
+ #!/bin/bash
+docker kill $(docker ps -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -q)
+exit;
+
+Now, run the run_from_scratch.sh to run all the commands needed to build the app(in debug mode.)
+
+## Bugfixes
+###  In docker-compose.yml:<bugfix> nginx port configuration was wrong:
+The right format for configuring port is 8080:80
+### In app.py:<bugfix> added port 5001 in the run
 Adding 5001 port to run lets us access from localhost.
 alternatively, we can change the port in dockerfile and flaskapp conf to 5000
 then there is no need to add the port explicity here
+###In app.py:<bugfix> added the appropriate display logic
+ 'results' tuple have the list of all the items in the db.
+ Iterate through the list and add it to a outputFile,
+ read the file and return the content as a String
+ (could have directly dumped it as string instead of writing into file
+ wrote into a line to make the output more readable)
+
+## Improvements:
+### In docker-compose.yml:<improvement> postgres version is not supported
+The mentioned version of postgres(9.6.5) is not supported anymore, so added the
+latest supported version on the same branch
+### In docker-compose.yml:<improvement> nginx version is not supported
+the mentioned version of postgres(9.6.5) is not supported anymore, so added the
+latest supported version on the same branch
+### In requirements.txt added recommended version of psycopg2
+psycopg2 changed to psycopg2-binary (warning in console while running)
