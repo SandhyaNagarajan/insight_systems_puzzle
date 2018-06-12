@@ -91,11 +91,10 @@ Now, run the run_from_scratch.sh to run all the commands needed to build the app
 
 ## Bugfixes
 ###  In docker-compose.yml:<bugfix> nginx port configuration was wrong:
-The right format for configuring port is 8080:80
+* The right format for configuring port is 8080:80
 ### In app.py:<bugfix> added port 5001 in the run
-Adding 5001 port to run lets us access from localhost.
-alternatively, we can change the port in dockerfile and flaskapp conf to 5000
-then there is no need to add the port explicity here
+* Adding 5001 port to run lets us access from localhost.
+* Alternatively, we can change the port in dockerfile and flaskapp conf to 5000, then there is no need to add the port explicity here.
 ### In app.py:<bugfix> 
 * Parse the Query results, which is a list of Items into a text file.
 * Used Flask Response function to display the output text file.
@@ -103,10 +102,8 @@ then there is no need to add the port explicity here
 
 ## Improvements:
 ### In docker-compose.yml:<improvement> postgres version is not supported
-The mentioned version of postgres(9.6.5) is not supported anymore, so added the
-latest supported version on the same branch
+* The mentioned version of postgres(9.6.5) is not supported anymore, so added the latest supported version on the same branch
 ### In docker-compose.yml:<improvement> nginx version is not supported
-the mentioned version of postgres(9.6.5) is not supported anymore, so added the
-latest supported version on the same branch
+* The mentioned version of postgres(9.6.5) is not supported anymore, so added the latest supported version on the same branch
 ### In requirements.txt added recommended version of psycopg2
-psycopg2 changed to psycopg2-binary (warning in console while running)
+* psycopg2 changed to psycopg2-binary (warning in console while running)
