@@ -96,12 +96,10 @@ The right format for configuring port is 8080:80
 Adding 5001 port to run lets us access from localhost.
 alternatively, we can change the port in dockerfile and flaskapp conf to 5000
 then there is no need to add the port explicity here
-###In app.py:<bugfix> added the appropriate display logic
- 'results' tuple have the list of all the items in the db.
- Iterate through the list and add it to a outputFile,
- read the file and return the content as a String
- (could have directly dumped it as string instead of writing into file
- wrote into a line to make the output more readable)
+### In app.py:<bugfix> 
+* Parse the Query results, which is a list of Items into a text file.
+* Used Flask Response function to display the output text file.
+* Could have also parsed the query results into a string and output the string directly.
 
 ## Improvements:
 ### In docker-compose.yml:<improvement> postgres version is not supported
