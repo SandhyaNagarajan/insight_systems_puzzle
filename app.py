@@ -33,6 +33,9 @@ def success():
 # read the file and return the content as a String
 # (could have directly dumped it as string instead of writing into file
 # wrote into a line to make the output more readable)
+# <improvement>
+# Its ideal to close the db session
+    db_session.close()
     outputFile = open("outputFromDB.txt", "w")
     outputFile.write("The Query from the DB are : ")
     for currentItem in results:

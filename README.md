@@ -95,7 +95,7 @@ Now, run the run_from_scratch.sh to run all the commands needed to build the app
 ### In app.py:<bugfix> added port 5001 in the run
 * Adding 5001 port to run lets us access from localhost.
 * Alternatively, we can change the port in dockerfile and flaskapp conf to 5000, then there is no need to add the port explicity here.
-### In app.py:<bugfix> 
+### In app.py:<bugfix>
 * Parse the Query results, which is a list of Items into a text file.
 * Used Flask Response function to display the output text file.
 * Could have also parsed the query results into a string and output the string directly.
@@ -107,3 +107,5 @@ Now, run the run_from_scratch.sh to run all the commands needed to build the app
 * The mentioned version of postgres(9.6.5) is not supported anymore, so added the latest supported version on the same branch
 ### In requirements.txt added recommended version of psycopg2
 * psycopg2 changed to psycopg2-binary (warning in console while running)
+### In app.py :<improvement> the db session was closed
+* The db_session is closed so that the session is added back to transaction pool.
