@@ -7,7 +7,7 @@
 4. [Instructions to submit your solution](README.md#instructions-to-submit-your-solution)
 5. [FAQ](README.md#faq)
 6. [SOLUTION](README.md#Sandhya-solution)
-7. [CI/CD] (testing webhook created for jenkins 1..2..3)
+7. [CI/CD] (testing github_webhook created for jenkins 1..2..3)
 
 # Understanding the puzzle
 
